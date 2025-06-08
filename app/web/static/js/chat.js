@@ -871,7 +871,7 @@ const app = Vue.createApp({
 <img src="/static/images/nephesh.png" alt="Nephesh Logo" class="welcome-logo">
 <h1 class="welcome-title">你好！我是 Nephesh</h1>
 
-<p style="position: relative; z-index: 2;">我可以帮助你完成各种任务。以下是我的一些核心能力：</p>
+<p style="position: relative; z-index: 2;">Posso ajudá-lo com diversas tarefas. Aqui estão algumas das minhas principais habilidades:</p>
 </div>
 
 <style>
@@ -1121,23 +1121,23 @@ body:not(.dark-theme) .welcome-subtitle {
 
 <h5 style="font-size: 0.85rem; margin-top: 15px; margin-bottom: 10px; font-weight: 600; display: flex; align-items: center;">
   <span style="font-size: 0.85rem;">💡</span>
-  <span style="margin-left: 5px;">示例任务</span>
+  <span style="margin-left: 5px;">Tarefas de Exemplo</span>
 </h5>
 
 <ul class="welcome-tools-examples">
-  <li>📈 帮我分析这个Excel数据并生成趋势图表</li>
-  <li>📄 创建一个关于气候变化的详细PDF报告</li>
-  <li>🎨 为我的产品演示设计专业PPT，要有动画效果</li>
-  <li>⚙️ 编写一个Python爬虫程序获取新闻数据</li>
-  <li>🎭 生成一张未来城市科技风格的高清图像</li>
-  <li>🔢 帮我解决这个微积分方程：$\\frac{d}{dx}(x^2\\sin(x))$</li>
-  <li>✉️ 帮我写一封商务邮件给客户</li>
-  <li>🔎 查询最近关于人工智能的学术研究</li>
+  <li>📈 Ajude-me a analisar esses dados do Excel e gerar um gráfico de tendências</li>
+  <li>📄 Crie um relatório PDF detalhado sobre mudanças climáticas</li>
+  <li>🎨 Projete uma apresentação profissional em PPT para demonstração do meu produto, com efeitos de animação</li>
+  <li>⚙️ Escreva um programa Python de web scraping para obter dados de notícias</li>
+  <li>🎭 Gere uma imagem em alta definição de uma cidade futurista com estilo tecnológico</li>
+  <li>🔢 Ajude-me a resolver esta equação de cálculo: $\\frac{d}{dx}(x^2\\sin(x))$</li>
+  <li>✉️ Ajude-me a escrever um e-mail comercial para o cliente</li>
+  <li>🔎 Pesquise estudos acadêmicos recentes sobre inteligência artificial</li>
 </ul>
 
 <div class="welcome-message-footer">
-你可以直接告诉我你需要什么帮助，或者上传文件让我协助处理。
-<div class="welcome-message-tips">提示：点击右上角的"上传"按钮可以上传文件给我处理</div>
+Você pode me dizer diretamente que tipo de ajuda precisa ou enviar arquivos para eu ajudar no processamento.
+<div class="welcome-message-tips">Dica: Clique no botão "Upload" no canto superior direito para enviar arquivos para processamento</div>
 </div>
 
 <style>
@@ -1765,7 +1765,7 @@ body:not(.dark-theme) .welcome-subtitle {
         // Delete file
         async deleteFile(filePath) {
             try {
-                if (!confirm(`确定要删除文件"${filePath}"吗？此操作无法撤销。`)) {
+                if (!confirm(`Tem certeza de que deseja excluir o arquivo "${filePath}"? Esta ação não pode ser desfeita.`)) {
                     return;
                 }
 

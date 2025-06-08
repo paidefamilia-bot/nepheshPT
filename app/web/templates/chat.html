@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -50,7 +50,7 @@
                 <div class="bounce2"></div>
                 <div class="bounce3"></div>
             </div>
-            <p>系统启动中...</p>
+            <p>Iniciando sistema...</p>
         </div>
     </div>
 
@@ -59,7 +59,7 @@
         <nav class="main-nav">
             <div class="nav-container">
                 <!-- 添加侧边栏打开按钮 -->
-                <button v-show="!showSidebar" @click="toggleSidebar" class="nav-button" title="打开侧边栏">
+                <button v-show="!showSidebar" @click="toggleSidebar" class="nav-button" title="Abrir barra lateral">
                     <i class="fas fa-bars"></i>
                 </button>
 
@@ -73,7 +73,7 @@
                     <!-- 会话ID显示 -->
                     <div class="session-id-display">
                         <i class="fas fa-fingerprint"></i>
-                        <span>${sessionId || '未连接'}</span>
+                        <span>${sessionId || 'Desconectado'}</span>
                     </div>
 
                     <!-- 在导航栏中添加通知区域 -->
@@ -95,20 +95,20 @@
                     </div>
 
                     <!-- 添加历史按钮 -->
-                    <a href="/history" class="nav-button" title="历史记录">
+                    <a href="/history" class="nav-button" title="Histórico">
                         <i class="fas fa-history"></i>
                     </a>
 
-                    <button class="theme-toggle" @click="toggleTheme" :title="isDarkTheme ? '切换到浅色模式' : '切换到深色模式'">
+                    <button class="theme-toggle" @click="toggleTheme" :title="isDarkTheme ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
                         <i class="fas" :class="isDarkTheme ? 'fa-moon' : 'fa-sun'"></i>
                     </button>
 
                     <!-- 添加配置按钮 -->
-                    <button class="config-toggle" @click="toggleConfigPanel" :title="'系统配置'">
+                    <button class="config-toggle" @click="toggleConfigPanel" :title="'Configuração do sistema'">
                         <i class="fas fa-wrench"></i>
                     </button>
 
-                    <a href="https://github.com/raydoomed/OpenManus" target="_blank" title="访问GitHub项目仓库"
+                    <a href="https://github.com/raydoomed/OpenManus" target="_blank" title="Acessar repositório no GitHub"
                         class="github-nav-link">
                         <i class="fab fa-github"></i>
                     </a>
@@ -129,14 +129,11 @@
                 <div class="tool-section system-info">
                     <div class="tool-header">
                         <i class="fas fa-info-circle"></i>
-                        <h3>系统信息</h3>
+                        <h3>Informações do Sistema</h3>
                     </div>
                     <div class="info-content">
                         <p class="system-info-text">
-                            <span class="system-highlight">Nephesh</span> <span class="system-emoji">✨</span> 是一个基于
-                            大语言模型 <span class="system-emoji">🤖</span> 的智能代理平台，集成了多种工具
-                            能力 <span class="system-emoji">🛠️</span>，支持复杂任务
-                            执行 <span class="system-emoji">🚀</span> 和自动化流程 <span class="system-emoji">⚙️</span>。
+                            <span class="system-highlight">Nephesh</span> <span class="system-emoji">✨</span> é uma plataforma de agente inteligente baseada em modelos de linguagem de grande escala <span class="system-emoji">🤖</span> que integra diversas capacidades de ferramentas <span class="system-emoji">🛠️</span>, suporta a execução de tarefas complexas <span class="system-emoji">🚀</span> e fluxos de automação <span class="system-emoji">⚙️</span>.
                         </p>
                     </div>
                 </div>
@@ -144,17 +141,17 @@
                 <div class="tool-section">
                     <div class="tool-header">
                         <i class="fas fa-bolt"></i>
-                        <h3>会话控制</h3>
+                        <h3>Controle de Sessão</h3>
                     </div>
                     <div class="tool-buttons">
                         <button @click="createNewSession" class="primary-btn">
                             <i class="fas fa-plus"></i>
-                            <span>新会话</span>
+                            <span>Nova Sessão</span>
                         </button>
                         <button @click="terminateSession" :disabled="!isConnected" class="secondary-btn">
                             <i class="fas"
                                 :class="[isProcessing && !isConnected ? 'fa-spinner fa-spin' : 'fa-stop']"></i>
-                            <span>${isProcessing && !isConnected ? '终止中' : '终止'}</span>
+                            <span>${isProcessing && !isConnected ? 'Terminando' : 'Terminar'}</span>
                         </button>
                     </div>
                 </div>
@@ -163,14 +160,14 @@
                 <div class="tool-section">
                     <div class="tool-header">
                         <i class="fas fa-folder-open"></i>
-                        <h3>文件浏览器</h3>
-                        <button @click="refreshFiles" class="refresh-btn" title="刷新文件列表">
+                        <h3>Explorador de Arquivos</h3>
+                        <button @click="refreshFiles" class="refresh-btn" title="Atualizar lista de arquivos">
                             <i class="fas fa-sync-alt"></i>
                         </button>
                     </div>
                     <div class="workspace-files">
                         <div v-if="workspaceFiles.length === 0" class="no-files">
-                            <p>工作区中没有文件</p>
+                            <p>Nenhum arquivo no espaço de trabalho</p>
                         </div>
                         <ul v-else class="files-list">
                             <li v-for="file in workspaceFiles" :key="file.path" class="file-item">
@@ -180,11 +177,11 @@
                                     <div class="file-size">${formatFileSize(file.size)}</div>
                                 </div>
                                 <div class="file-actions">
-                                    <button @click="downloadFile(file.path)" class="file-action-btn" title="下载文件">
+                                    <button @click="downloadFile(file.path)" class="file-action-btn" title="Baixar arquivo">
                                         <i class="fas fa-download"></i>
                                     </button>
                                     <button @click="deleteFile(file.path)" class="file-action-btn delete-btn"
-                                        title="删除文件">
+                                        title="Excluir arquivo">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>
@@ -197,7 +194,7 @@
                 <div class="tool-section tools-container">
                     <div class="tool-header">
                         <i class="fas fa-tools"></i>
-                        <h3>工具列表</h3>
+                        <h3>Lista de Ferramentas</h3>
                     </div>
 
                     <div class="tools-panel">
@@ -210,7 +207,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <p v-else class="no-tools">没有加载工具</p>
+                        <p v-else class="no-tools">Nenhuma ferramenta carregada</p>
                     </div>
                 </div>
 
@@ -265,10 +262,10 @@
                                         <div class="manus-eye"></div>
                                     </div>
                                     <span class="thinking-text" v-if="agentStatus.currentStep > 0">
-                                        Nephesh 正在处理中... (步骤 ${agentStatus.currentStep}/${agentStatus.maxSteps})
+                                        Nephesh está processando... (Passo ${agentStatus.currentStep}/${agentStatus.maxSteps})
                                     </span>
                                     <span class="thinking-text" v-else>
-                                        Nephesh 正在思考...
+                                        Nephesh está pensando...
                                     </span>
                                 </div>
                             </div>
@@ -278,11 +275,11 @@
                         <div class="agent-input-area">
                             <div class="input-container">
                                 <textarea v-model="userInput" @keydown.enter.ctrl="sendMessage"
-                                    :disabled="isProcessing || !isConnected" placeholder="输入命令，Ctrl+Enter 发送"
+                                    :disabled="isProcessing || !isConnected" placeholder="Digite o comando, Ctrl+Enter para enviar"
                                     ref="userInputArea"></textarea>
 
                                 <div class="input-actions">
-                                    <button class="action-btn" title="上传文件" @click.stop="openUploadModal">
+                                    <button class="action-btn" title="Enviar arquivo" @click.stop="openUploadModal">
                                         <i class="fas fa-paperclip"></i>
                                     </button>
                                     <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none">
@@ -308,8 +305,8 @@
                         <div class="current-tool-display" v-if="currentToolInUse">
                             <i v-if="currentToolInUse === 'terminate'" class="fas fa-check-circle completed-icon"></i>
                             <i v-else class="fas fa-cog"></i>
-                            <span v-if="currentToolInUse === 'terminate'">Nephesh 已完成</span>
-                            <span v-else>Nephesh 正在使用: ${currentToolInUse}</span>
+                            <span v-if="currentToolInUse === 'terminate'">Nephesh concluiu</span>
+                            <span v-else>Nephesh está usando: ${currentToolInUse}</span>
                         </div>
 
                         <div class="column-content">

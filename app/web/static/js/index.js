@@ -38,11 +38,11 @@ function initLoadingScreen() {
     });
 
     const messages = [
-        "正在初始化系统组件...",
-        "正在连接神经网络...",
-        "正在加载AI模块...",
-        "正在校准响应模式...",
-        "正在启动量子处理器..."
+        "Inicializando componentes do sistema...",
+        "Conectando-se à rede neural...",
+        "Carregando módulo de IA...",
+        "Calibrando modo de resposta...",
+        "Iniciando processador quântico..."
     ];
 
     let progress = 0;

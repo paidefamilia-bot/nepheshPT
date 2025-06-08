@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenManus - 历史记录</title>
+    <title>OpenManus - Histórico</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
     <!-- 导入Axios用于HTTP请求 -->
@@ -33,7 +33,7 @@
                 <div class="bounce2"></div>
                 <div class="bounce3"></div>
             </div>
-            <p>系统启动中...</p>
+            <p>Inicializando o sistema...</p>
         </div>
     </div>
 
@@ -48,15 +48,15 @@
                 </a>
 
                 <div class="nav-controls">
-                    <a href="/chat" class="nav-button" title="返回聊天">
+                    <a href="/chat" class="nav-button" title="Voltar ao chat">
                         <i class="fas fa-comment"></i>
                     </a>
 
-                    <button class="theme-toggle" @click="toggleTheme" :title="isDarkTheme ? '切换到浅色模式' : '切换到深色模式'">
+                    <button class="theme-toggle" @click="toggleTheme" :title="isDarkTheme ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
                         <i class="fas" :class="isDarkTheme ? 'fa-moon' : 'fa-sun'"></i>
                     </button>
 
-                    <a href="https://github.com/raydoomed/OpenManus" target="_blank" title="访问GitHub项目仓库"
+                    <a href="https://github.com/raydoomed/OpenManus" target="_blank" title="Acessar repositório do GitHub"
                         class="github-nav-link">
                         <i class="fab fa-github"></i>
                     </a>
@@ -67,7 +67,7 @@
         <!-- 主内容区域 -->
         <div class="history-container">
             <!-- 返回按钮，仅在查看详情时显示 -->
-            <button v-if="selectedSession" @click="backToList" class="nav-button back-button" title="返回列表">
+            <button v-if="selectedSession" @click="backToList" class="nav-button back-button" title="Voltar à lista">
                 <i class="fas fa-arrow-left"></i>
             </button>
 
@@ -78,7 +78,7 @@
                     <div class="bounce2"></div>
                     <div class="bounce3"></div>
                 </div>
-                <p>加载中...</p>
+                <p>Carregando...</p>
             </div>
 
             <!-- 错误提示 -->
@@ -90,16 +90,16 @@
             <!-- 历史列表页面 -->
             <div v-if="!selectedSession && !isLoading" class="history-list-view">
                 <div class="history-header">
-                    <h2 class="history-title">历史会话记录</h2>
+                    <h2 class="history-title">Histórico de Sessões</h2>
                     <div class="history-actions">
                         <button @click="confirmClearHistory" class="secondary-btn danger-btn"
                             :disabled="isLoading || historyList.length === 0">
                             <i class="fas fa-trash"></i>
-                            清空
+                            Limpar
                         </button>
                         <button @click="refreshHistory" class="secondary-btn" :disabled="isLoading">
                             <i class="fas" :class="[isLoading ? 'fa-spinner fa-spin' : 'fa-sync-alt']"></i>
-                            ${isLoading ? '加载中...' : '刷新'}
+                            ${isLoading ? 'Carregando...' : 'Atualizar'}
                         </button>
                     </div>
                 </div>
@@ -107,26 +107,26 @@
                 <!-- 空历史提示 -->
                 <div v-if="historyList.length === 0 && !hasError" class="empty-history">
                     <i class="fas fa-history"></i>
-                    <p class="empty-history-text">没有历史记录</p>
+                    <p class="empty-history-text">Nenhum histórico encontrado</p>
                 </div>
 
                 <!-- 历史记录列表 -->
                 <div v-else class="history-list">
                     <div v-for="item in historyList" :key="item.session_id" class="history-item">
                         <div class="history-item-header">
-                            <span class="history-item-session">会话ID: ${item.session_id.substring(0, 8)}...</span>
+                            <span class="history-item-session">ID da sessão: ${item.session_id.substring(0, 8)}...</span>
                             <span class="history-item-date">${formatDate(item.created_at)}</span>
                         </div>
                         <div class="history-item-prompt">${item.first_prompt}</div>
                         <div class="history-item-meta">
-                            <span>${item.prompt_count} 条指令</span>
+                            <span>${item.prompt_count} instruções</span>
                             <div class="history-item-actions">
                                 <button @click.stop="viewSessionDetail(item.session_id)" class="text-btn">
-                                    <i class="fas fa-eye"></i> 查看
+                                    <i class="fas fa-eye"></i> Ver
                                 </button>
                                 <button @click.stop="confirmDeleteSession(item.session_id)"
                                     class="text-btn text-danger">
-                                    <i class="fas fa-trash"></i> 删除
+                                    <i class="fas fa-trash"></i> Excluir
                                 </button>
                             </div>
                         </div>
@@ -138,18 +138,18 @@
             <div v-if="selectedSession && !isLoading" class="history-detail-view">
                 <div class="history-detail">
                     <div class="history-detail-header">
-                        <h3 class="history-detail-title">会话详情</h3>
-                        <div class="history-detail-session">会话ID: ${sessionDetail.session_id}</div>
+                        <h3 class="history-detail-title">Detalhes da Sessão</h3>
+                        <div class="history-detail-session">ID da sessão: ${sessionDetail.session_id}</div>
                         <div class="history-detail-date">
-                            开始时间: ${formatDate(sessionDetail.created_at)}
+                            Início: ${formatDate(sessionDetail.created_at)}
                             <span v-if="sessionDetail.completed_at">
-                                | 结束时间: ${formatDate(sessionDetail.completed_at)}
+                                | Fim: ${formatDate(sessionDetail.completed_at)}
                             </span>
                         </div>
                         <div class="history-detail-actions">
                             <div class="export-dropdown">
                                 <button class="secondary-btn">
-                                    <i class="fas fa-download"></i> 导出
+                                    <i class="fas fa-download"></i> Exportar
                                 </button>
                                 <div class="export-dropdown-content">
                                     <button @click="exportSession(sessionDetail.session_id, 'json')"
@@ -165,7 +165,7 @@
                                         <i class="fas fa-file-alt"></i> Markdown
                                     </button>
                                     <button @click="exportSession(sessionDetail.session_id, 'pdf')"
-                                        class="export-option" title="使用系统打印机导出PDF（如Microsoft打印为PDF）">
+                                        class="export-option" title="Exportar para PDF usando a impressora do sistema (ex: Microsoft Print to PDF)">
                                         <i class="fas fa-file-pdf"></i> PDF
                                     </button>
                                 </div>
@@ -174,22 +174,22 @@
                     </div>
 
                     <!-- 用户提示列表 -->
-                    <h4>用户指令 (${sessionDetail.prompts.length})</h4>
+                    <h4>Instruções do Usuário (${sessionDetail.prompts.length})</h4>
                     <div v-for="(prompt, index) in sessionDetail.prompts" :key="'p-'+index"
                         class="history-message user">
-                        <div class="history-message-role">用户</div>
+                        <div class="history-message-role">Usuário</div>
                         <div class="history-message-time">${formatDate(prompt.time)}</div>
                         <div class="history-message-content">${prompt.content}</div>
                     </div>
 
                     <!-- 消息记录 -->
-                    <h4>完整对话记录 (${sessionDetail.messages.length})</h4>
+                    <h4>Registro Completo da Conversa (${sessionDetail.messages.length})</h4>
                     <div v-for="(message, index) in sessionDetail.messages" :key="'m-'+index"
                         :class="['history-message', message.role]">
                         <div class="history-message-role">
-                            ${message.role === 'assistant' ? 'Manus' :
-                            message.role === 'user' ? '用户' :
-                            message.role === 'tool' ? '工具' : message.role}
+                            ${message.role === 'assistant' ? 'Assistente' :
+                            message.role === 'user' ? 'Usuário' :
+                            message.role === 'tool' ? 'Ferramenta' : message.role}
                             <span v-if="message.role === 'tool' && message.name"
                                 class="tool-name">(${message.name})</span>
                         </div>
@@ -201,7 +201,7 @@
                             <div v-for="(toolCall, toolIndex) in message.tool_calls" :key="'tc-'+index+'-'+toolIndex"
                                 class="tool-call">
                                 <div class="tool-call-header">
-                                    <span class="tool-call-name">工具调用: ${toolCall.function.name}</span>
+                                    <span class="tool-call-name">Chamada de ferramenta: ${toolCall.function.name}</span>
                                 </div>
                                 <pre
                                     class="tool-call-args"><code class="language-json">${formatJson(toolCall.function.arguments)}</code></pre>
